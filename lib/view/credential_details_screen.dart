@@ -42,7 +42,6 @@ class _CredentialDetailsScreenState extends State<CredentialDetailsScreen> {
         iconTheme: const IconThemeData(color: primaryTextColor),
         title: const Text(
           'Perfil de credencial',
-          // CORRIGIDO: Estilo do texto do título
           style: TextStyle(
             color: primaryTextColor,
             fontWeight: FontWeight.bold,
