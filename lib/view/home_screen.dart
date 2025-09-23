@@ -100,7 +100,6 @@ class HomeScreen extends StatelessWidget {
             title: Text(entry.title, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
             subtitle: Text(subtitleText, style: const TextStyle(color: Colors.white70, fontSize: 12)),
             onTap: () {
-              // CORRIGIDO: Navegação para a tela correta (Detalhes da Credencial)
               Navigator.push(
                 context,
                 MaterialPageRoute(

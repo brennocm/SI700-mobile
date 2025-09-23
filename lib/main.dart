@@ -17,7 +17,7 @@ class KeyGuardianApp extends StatelessWidget {
         fontFamily: 'Sans-serif',
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            foregroundColor: const Color(0xFF333333), // Cor do texto escura
+            foregroundColor: const Color(0xFF333333), 
           ),
         ),
       ),
