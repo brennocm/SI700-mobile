@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'credential_details_screen.dart';
 import 'password_generator_screen.dart';
 import 'user_profile_screen.dart';
+import 'welcome_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -29,7 +30,6 @@ class HomeScreen extends StatelessWidget {
         iconTheme: const IconThemeData(color: primaryTextColor),
         title: const Text(
           'Todas as entradas',
-
           style: TextStyle(
             color: primaryTextColor,
             fontWeight: FontWeight.bold,
@@ -40,52 +40,79 @@ class HomeScreen extends StatelessWidget {
       ),
       drawer: Drawer(
         backgroundColor: const Color(0xFFFFDAB9),
-        child: ListView(
-          padding: EdgeInsets.zero,
+        child: Column( 
           children: <Widget>[
-            DrawerHeader(
-              decoration: const BoxDecoration(
-                color: Color(0xFFFFDAB9),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  GestureDetector(
+            Expanded(
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: <Widget>[
+                  DrawerHeader(
+                    decoration: const BoxDecoration(
+                      color: Color(0xFFFFDAB9),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context); // Fecha o drawer
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const UserProfileScreen()));
+                          },
+                          child: Image.asset(
+                            'assets/images/icon-without-name.png',
+                            height: 80,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.vpn_key_outlined,
+                        color: Color(0xFF212121)),
+                    title: const Text('Todas as entradas',
+                        style: TextStyle(
+                            color: Color(0xFF212121),
+                            fontWeight: FontWeight.bold)),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.password_rounded,
+                        color: Color(0xFF212121)),
+                    title: const Text('Gerador de senhas',
+                        style: TextStyle(
+                            color: Color(0xFF212121),
+                            fontWeight: FontWeight.bold)),
                     onTap: () {
                       Navigator.pop(context); // Fecha o drawer
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  const UserProfileScreen()));
+                                  const PasswordGeneratorScreen()));
                     },
-                    child: Image.asset(
-                      'assets/images/icon-without-name.png',
-                      height: 80,
-                    ),
                   ),
                 ],
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.vpn_key_outlined, color: Color(0xFF212121)),
-              title: const Text('Todas as entradas', style: TextStyle(color: Color(0xFF212121), fontWeight: FontWeight.bold)),
+              leading: const Icon(Icons.logout, color: Color(0xFF212121)),
+              title: const Text('Sair',
+                  style: TextStyle(
+                      color: Color(0xFF212121), fontWeight: FontWeight.bold)),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => const WelcomeScreen()),
+                  (Route<dynamic> route) => false,
+                );
               },
             ),
-            ListTile(
-              leading: const Icon(Icons.password_rounded, color: Color(0xFF212121)),
-              title: const Text('Gerador de senhas', style: TextStyle(color: Color(0xFF212121), fontWeight: FontWeight.bold)),
-              onTap: () {
-                Navigator.pop(context); // Fecha o drawer
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            const PasswordGeneratorScreen()));
-              },
-            ),
+            const SizedBox(height: 20), 
           ],
         ),
       ),
@@ -93,12 +120,17 @@ class HomeScreen extends StatelessWidget {
         itemCount: entries.length,
         itemBuilder: (context, index) {
           final entry = entries[index];
-          final subtitleText = entry.url.replaceAll('https://', '').replaceAll('www.', '');
+          final subtitleText =
+              entry.url.replaceAll('https://', '').replaceAll('www.', '');
 
           return ListTile(
-            leading: const Icon(Icons.arrow_forward_ios, color: Colors.white70, size: 16),
-            title: Text(entry.title, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-            subtitle: Text(subtitleText, style: const TextStyle(color: Colors.white70, fontSize: 12)),
+            leading: const Icon(Icons.arrow_forward_ios,
+                color: Colors.white70, size: 16),
+            title: Text(entry.title,
+                style: const TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.bold)),
+            subtitle: Text(subtitleText,
+                style: const TextStyle(color: Colors.white70, fontSize: 12)),
             onTap: () {
               Navigator.push(
                 context,
@@ -123,4 +155,3 @@ class PasswordEntry {
     required this.url,
   });
 }
-

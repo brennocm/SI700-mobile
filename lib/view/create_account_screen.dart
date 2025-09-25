@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'login_screen.dart'; // Importe a tela de login
 
 class CreateAccountScreen extends StatefulWidget {
   const CreateAccountScreen({super.key});
@@ -47,10 +48,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   ),
                 ),
                 const SizedBox(height: 40),
-
                 _buildTextField(label: 'E-mail', keyboardType: TextInputType.emailAddress),
                 const SizedBox(height: 20),
-
                 _buildPasswordField(
                   label: 'Senha',
                   isObscured: _isPasswordObscured,
@@ -61,7 +60,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   },
                 ),
                 const SizedBox(height: 20),
-
                 _buildPasswordField(
                   label: 'Repita a senha',
                   isObscured: _isConfirmPasswordObscured,
@@ -72,10 +70,13 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   },
                 ),
                 const SizedBox(height: 40),
-                
                 ElevatedButton(
                   onPressed: () {
-                    print('Botão "Próximo" pressionado!');
+                    // --- ALTERAÇÃO AQUI ---
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const LoginScreen()),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF212121),

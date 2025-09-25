@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'login_screen.dart'; // Importe a tela de login
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -44,13 +45,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   ),
                 ),
                 const SizedBox(height: 40),
-
                 _buildTextField(
                   label: 'E-mail',
                   keyboardType: TextInputType.emailAddress,
                 ),
                 const SizedBox(height: 20),
-
                 _buildPasswordField(
                   label: 'Nova senha',
                   isObscured: _isNewPasswordObscured,
@@ -61,7 +60,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   },
                 ),
                 const SizedBox(height: 20),
-
                 _buildPasswordField(
                   label: 'Repita a senha',
                   isObscured: _isConfirmPasswordObscured,
@@ -72,10 +70,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   },
                 ),
                 const SizedBox(height: 40),
-
                 ElevatedButton(
                   onPressed: () {
-                    print('Botão "Próximo" da recuperação pressionado!');
+                    // --- ALTERAÇÃO AQUI ---
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const LoginScreen()),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF212121),
